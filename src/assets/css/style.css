@@ -1,0 +1,123 @@
+html {
+	background-image: linear-gradient(to bottom right, #E1BEE7, #B2EBF2);
+	height: 150%;
+}
+
+h1,
+p,
+button, a {
+	font-family: Helvetica, sans-serif;
+	font-weight: 100;
+	color: #fff;
+}
+
+h1 {
+	letter-spacing: 0.5em;
+	text-align: center;
+	margin-top: 50px;
+	line-height: 1.6em;
+}
+
+p {
+	font-size: 1.1em;
+	text-align: center;
+	margin: 110px auto 20px;
+	letter-spacing: 0.05em;
+}
+
+.container {
+	text-align: center;
+	position: relative;
+	width: 300px;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+.btn-report {
+  text-decoration: none;
+	position: relative;
+	height: 50px;
+	width: 280px;
+	border: 0;
+	border-radius: 5px;
+	text-transform: uppercase;
+	font-size: 1.1em;
+	letter-spacing: 0.2em;
+	overflow: hidden;
+	z-index: -2;
+}
+
+
+.fill-one {
+	position: absolute;
+	background-image: linear-gradient(to right, #E040FB, #00BCD4);
+	height: 70px;
+	width: 420px;
+	border-radius: 5px;
+	margin: -40px 0 0 -140px;
+	z-index: -1;
+	transition: all 0.4s ease;
+}
+
+.container-one:hover .fill-one {
+	-webkit-transform: translateX(100px);
+	-moz-transform: translateX(100px);
+	transform: translateX(100px);
+}
+
+.fill-two {
+	position: absolute;
+  background-image: -webkit-gradient(linear, left top, right top, from(#E040FB), to(#00BCD4));
+  background-image: linear-gradient(to right, #E040FB, #00BCD4);
+  background-size: 100% 150%;
+  height: 70px;
+  width: 226px;
+  border-radius: 5px;
+  margin: -42px 0 0 36px;
+  z-index: -1;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.container-two:hover .fill-two {
+	-webkit-animation: gradient 3s ease infinite;
+	-moz-animation: gradient 3s ease infinite;
+	animation: gradient 3s ease infinite;
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.col-md-5 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 40%;
+  flex: 0 0 40%;
+  max-width: 40%
+}
+
+.col-md-6 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 50%;
+  flex: 0 0 50%;
+  max-width: 50%
+}
+
+.col-md-7 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 58.333333%;
+  flex: 0 0 58.333333%;
+  max-width: 58.333333%
+}
+.col-md-8 {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 66.666667%;
+  flex: 0 0 66.666667%;
+  max-width: 66.666667%
+}
+.justify-items-center {
+    justify-content: center;
+}
