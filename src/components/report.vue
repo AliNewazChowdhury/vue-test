@@ -68,13 +68,9 @@ export default {
   computed:{
     sorted() {
       return this.books.sort((a,b) => {
-        console.log(this.currentSort);
-        console.log(a[this.currentSort]+' '+(b[this.currentSort]));
-        console.log(parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort]));
-        console.log(a[this.currentSort] < b[this.currentSort]);
         let modifier = 1;
         if(this.currentSortDir === 'desc') modifier = -1;
-        if (this.isFloat(a[this.currentSort]) && this.isFloat(b[this.currentSort])) {
+        if (!isNaN(parseFloat(b[this.currentSort]))) {
           if( parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort]) ) return -1 * modifier;
           if( parseFloat(a[this.currentSort]) > parseFloat(b[this.currentSort])) return 1 * modifier;
         } else {
@@ -87,7 +83,8 @@ export default {
   },
   methods: {
     isFloat(n){
-        return Number(n) === n && n % 1 !== 0;
+      n = parseFloat(n);
+      return n === +n && n !== (n|0);
     },
     sort(s) {
       if(s === this.currentSort) {
