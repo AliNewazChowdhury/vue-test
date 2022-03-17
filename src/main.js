@@ -4,8 +4,13 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-import SmartTable from 'vuejs-smart-table'
-Vue.use(SmartTable)
+import { library } from '@fortawesome/fontawesome-svg-core'
+import {faArrowAltCircleDown} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+
+library.add(faArrowAltCircleDown)
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 Vue.config.productionTip = false
 require('./assets/css/style.css')
 /* eslint-disable no-new */

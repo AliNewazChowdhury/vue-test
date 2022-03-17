@@ -11,7 +11,27 @@
           </a>
         </div>
       </div>
-      <v-table
+      <table
+        class="table table-bordered table-striped dataTable"
+        style="width: 600px; height:150px;">
+        <thead>
+          <tr>
+            <th @click="sort('Book ID')">Book ID <font-awesome-icon :class="{'up' : currentSort === 'Book ID' && currentSortDir == 'asc'  }"  :icon="['fas', 'arrow-alt-circle-down']" /> </th>
+            <th @click="sort('Book Name')">Book Name<font-awesome-icon style="margin-left:3px;" :class="{'up' : currentSort === 'Book Name' && currentSortDir == 'asc'  }" :icon="['fas', 'arrow-alt-circle-down']" /></th>
+            <th @click="sort('Category')">Category <font-awesome-icon :class="{'up' : currentSort === 'Category' && currentSortDir == 'asc' }" :icon="['fas', 'arrow-alt-circle-down']"/></th>
+            <th @click="sort('Price')">Price <font-awesome-icon :class="{'up' : currentSort === 'Price' && currentSortDir == 'asc' }" :icon="['fas', 'arrow-alt-circle-down']"/></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="book in sorted" :key="book['Book ID']">
+            <td>{{book['Book ID']}}</td>
+            <td>{{book['Book Name']}}</td>
+            <td>{{book['Category']}}</td>
+            <td>{{book['Price']}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- <v-table
         class="table table-bordered table-striped dataTable"
         style="width: 600px; height:150px;"
         :data="users"
@@ -30,7 +50,7 @@
             <td>{{ row['Price'] }}</td>
           </tr>
         </tbody>
-      </v-table>
+      </v-table> -->
     </div>
   </div>
 </template>
@@ -42,7 +62,7 @@ import 'jspdf-autotable'
 export default {
   name: 'Sorting',
   data: () => ({
-    users: [
+    books: [
       {
         'Book ID': '1',
         'Book Name': 'Challenging Times',
@@ -61,9 +81,33 @@ export default {
         'Category': 'Science',
         'Price': '210.40'
       }
-    ]
+    ],
+    currentSort:'Book ID',
+    currentSortDir:'asc'
   }),
+  computed:{
+    sorted() {
+      return this.books.sort((a,b) => {
+        let modifier = 1;
+        if(this.currentSortDir === 'desc') modifier = -1;
+        if (this.currentSort === 'Price') {
+          if(parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort])) return -1 * modifier;
+          if(parseFloat(a[this.currentSort]) > parseFloat(b[this.currentSort])) return 1 * modifier;
+        } else {
+          if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
+          if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
+        }
+        return 0;
+      })
+    }
+  },
   methods: {
+    sort(s) {
+      if(s === this.currentSort) {
+        this.currentSortDir = this.currentSortDir==='asc'?'desc':'asc';
+      }
+      this.currentSort = s;
+    },
     xlsxReport () {
       const data = XLSX.utils.json_to_sheet(this.users)
       const wb = XLSX.utils.book_new()
@@ -211,5 +255,9 @@ th{
   text-align:center;
   cursor: pointer;
   height: 20px;
+}
+.up {
+  transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
 }
 </style>
