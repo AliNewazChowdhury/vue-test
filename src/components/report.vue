@@ -31,26 +31,6 @@
           </tr>
         </tbody>
       </table>
-      <!-- <v-table
-        class="table table-bordered table-striped dataTable"
-        style="width: 600px; height:150px;"
-        :data="users"
-      >
-        <thead slot="head">
-          <v-th sortKey="Book ID">Book Id</v-th>
-          <v-th sortKey="Book Name">Book Name</v-th>
-          <v-th sortKey="Category">Category</v-th>
-          <v-th sortKey="Price">Price</v-th>
-        </thead>
-        <tbody slot="body" slot-scope="{displayData}">
-          <tr v-for="row in displayData" :key="row.guid">
-            <td>{{ row['Book ID'] }}</td>
-            <td>{{ row['Book Name'] }}</td>
-            <td>{{ row['Category'] }}</td>
-            <td>{{ row['Price'] }}</td>
-          </tr>
-        </tbody>
-      </v-table> -->
     </div>
   </div>
 </template>
@@ -104,7 +84,7 @@ export default {
       this.currentSort = s;
     },
     xlsxReport () {
-      const data = XLSX.utils.json_to_sheet(this.users)
+      const data = XLSX.utils.json_to_sheet(this.books)
       const wb = XLSX.utils.book_new()
       XLSX.utils.book_append_sheet(wb, data, 'data')
       XLSX.writeFile(wb, 'report.xlsx')
@@ -121,7 +101,7 @@ export default {
 
       /* The following array of object as response from the API req  */
 
-      this.users.forEach(element => {
+      this.books.forEach(element => {
         let temp = [element['Book ID'], element['Book Name'], element['Category'], element['Price']]
         rows.push(temp)
       })
