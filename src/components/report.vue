@@ -90,13 +90,8 @@ export default {
       return this.books.sort((a,b) => {
         let modifier = 1;
         if(this.currentSortDir === 'desc') modifier = -1;
-        if (this.currentSort === 'Price') {
-          if(parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort])) return -1 * modifier;
-          if(parseFloat(a[this.currentSort]) > parseFloat(b[this.currentSort])) return 1 * modifier;
-        } else {
-          if(a[this.currentSort] < b[this.currentSort]) return -1 * modifier;
-          if(a[this.currentSort] > b[this.currentSort]) return 1 * modifier;
-        }
+        if(a[this.currentSort] < b[this.currentSort] || parseFloat(a[this.currentSort]) < parseFloat(b[this.currentSort])) return -1 * modifier;
+        if(a[this.currentSort] > b[this.currentSort] || parseFloat(a[this.currentSort]) > parseFloat(b[this.currentSort])) return 1 * modifier;
         return 0;
       })
     }
